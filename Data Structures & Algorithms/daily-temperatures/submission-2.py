@@ -1,0 +1,27 @@
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        res = [0] * len(temperatures)
+        ref = []
+        #start with the last - it should always log to 0
+        nxt = temperatures.pop()
+        while temperatures:
+            index = len(temperatures) - 1
+            curr = temperatures[index]
+            ref.append(nxt)
+            #if next is warmer
+            if curr < nxt:
+                res[index] = 1
+            #check ref from index of - this is the hard part
+            else:
+                count = 0
+                print(ref)
+                print(curr)
+                for i in ref[::-1]:
+                    count+=1
+                    if i > curr:
+                        print(count)
+                        res[index] = count
+            nxt = temperatures.pop()
+        return res
+
+        

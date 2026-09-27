@@ -1,0 +1,23 @@
+class Solution:
+
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        subset = []
+        def dfs(i):
+            #reached sum
+            if sum(subset) == target and subset not in res:
+                res.append(subset.copy())
+                return
+            #out of bound/base case
+            if i >= len(candidates):
+                return
+            #passed sum
+            if sum(subset) > target:
+                return
+            #less than sub - keep adding
+            subset.append(candidates[i])
+            dfs(i+1)
+            subset.pop()
+            dfs(i+1)
+        dfs(0)
+        return res
